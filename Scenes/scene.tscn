@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://sge8va0fob61"]
 
+[ext_resource type="Script" uid="uid://d3bk3ogf7gu7a" path="res://Scripts/BeeMovement.gd" id="1_lrus4"]
 [ext_resource type="Texture2D" uid="uid://dytwxv7xjow32" path="res://Sprites/bumblebee.png" id="1_p6gg1"]
 [ext_resource type="Script" uid="uid://umu4pwybaq2w" path="res://Scripts/StartAnimation.gd" id="3_lrus4"]
 
@@ -25,10 +26,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Scene" type="Node2D" unique_id=1512873734]
+[node name="Main" type="Node2D" unique_id=1512873734]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1235925021]
-position = Vector2(405, 289)
+[node name="Node2D_bee_body" type="Node2D" parent="." unique_id=63562769]
+position = Vector2(0, 179.53)
+script = ExtResource("1_lrus4")
+base_speed = 40.0
+speed_amp = 10.0
+speed_freq = 0.5
+distance = 320.57
+wave_amp = 15.0
+
+[node name="AnimatedSprite2D_bee_view" type="AnimatedSprite2D" parent="Node2D_bee_body" unique_id=1235925021]
+scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_n35m2")
 animation = &"fly"
 script = ExtResource("3_lrus4")
