@@ -45,6 +45,7 @@ func _process(delta: float) -> void:
 	
 	_time += delta
 	_move(delta)
+	queue_redraw()
 
 
 func _move(delta: float) -> void:
@@ -60,16 +61,32 @@ func _move(delta: float) -> void:
 			_way_progress = 1
 			_is_going_forward = false
 			view.flip_h = _is_going_forward
+			_update_target_position()
 	else:
 		_way_progress -= step
 		if _way_progress <= 0:
 			_way_progress = 0
 			_is_going_forward = true
 			view.flip_h = _is_going_forward
+			_update_target_position()
+
 		
 	var point := start_pos.lerp(end_pos, _way_progress)
 	position = point	
 	view.position = Vector2(0, _noise.get_noise_1d(_time) * wave_amp)
+
+
+func _update_target_position() -> void:
+	var size = get_viewport().get_visible_rect().size.y
+	var margin := 40
+	var new_y = randf_range(margin, size - margin)
+	
+	if _is_going_forward:
+		end_pos.y = new_y
+	else: 
+		start_pos.y = new_y
+
+	_path_lenght = start_pos.distance_to(end_pos)
 
 
 func _draw() -> void:
