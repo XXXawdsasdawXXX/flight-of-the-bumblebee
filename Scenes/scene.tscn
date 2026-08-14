@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://d3bk3ogf7gu7a" path="res://Scripts/BeeMovement.gd" id="1_lrus4"]
 [ext_resource type="Texture2D" uid="uid://dytwxv7xjow32" path="res://Sprites/bumblebee.png" id="1_p6gg1"]
 [ext_resource type="Script" uid="uid://umu4pwybaq2w" path="res://Scripts/StartAnimation.gd" id="3_lrus4"]
+[ext_resource type="Texture2D" uid="uid://dok1h6et6c6ls" path="res://Sprites/leg.png" id="4_8t5iv"]
+[ext_resource type="Script" uid="uid://dpbydpsmc4x33" path="res://Scripts/InsectLeg.gd" id="4_yp48q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrus4"]
 atlas = ExtResource("1_p6gg1")
@@ -33,7 +35,7 @@ position = Vector2(0, 179.53)
 script = ExtResource("1_lrus4")
 view = NodePath("AnimatedSprite2D_bee_view")
 base_speed = 40.0
-speed_amp = 10.0
+speed_amp = 26.475
 speed_freq = 0.5
 wave_amp = 15.0
 start_pos = Vector2(-50, 300)
@@ -44,3 +46,35 @@ scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_n35m2")
 animation = &"fly"
 script = ExtResource("3_lrus4")
+
+[node name="Node2D_legs" type="Node2D" parent="Node2D_bee_body/AnimatedSprite2D_bee_view" unique_id=1338353285]
+position = Vector2(0, 44.9)
+
+[node name="Node2D_leg_a" type="Node2D" parent="Node2D_bee_body/AnimatedSprite2D_bee_view/Node2D_legs" unique_id=703871812 node_paths=PackedStringArray("bone0", "bone1", "bone2")]
+script = ExtResource("4_yp48q")
+bone0 = NodePath("Skeleton2D/Bone2D_0")
+bone1 = NodePath("Skeleton2D/Bone2D_0/Bone2D_1")
+bone2 = NodePath("Skeleton2D/Bone2D_0/Bone2D_1/Bone2D_2")
+drag = 0.007
+follow = 20.0
+max_bone_delta = 0.15
+
+[node name="Skeleton2D" type="Skeleton2D" parent="Node2D_bee_body/AnimatedSprite2D_bee_view/Node2D_legs/Node2D_leg_a" unique_id=1159328662]
+
+[node name="Bone2D_0" type="Bone2D" parent="Node2D_bee_body/AnimatedSprite2D_bee_view/Node2D_legs/Node2D_leg_a/Skeleton2D" unique_id=1451759504]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="Bone2D_1" type="Bone2D" parent="Node2D_bee_body/AnimatedSprite2D_bee_view/Node2D_legs/Node2D_leg_a/Skeleton2D/Bone2D_0" unique_id=1891377396]
+position = Vector2(0, 20)
+rest = Transform2D(1, 0, 0, 1, 0, 20)
+
+[node name="Bone2D_2" type="Bone2D" parent="Node2D_bee_body/AnimatedSprite2D_bee_view/Node2D_legs/Node2D_leg_a/Skeleton2D/Bone2D_0/Bone2D_1" unique_id=2013327996]
+position = Vector2(0, 33.333332)
+rest = Transform2D(1, 0, 0, 1, 0, 33.333332)
+
+[node name="Polygon2D" type="Polygon2D" parent="Node2D_bee_body/AnimatedSprite2D_bee_view/Node2D_legs/Node2D_leg_a" unique_id=147420283]
+texture = ExtResource("4_8t5iv")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(8.31192, 2.332407, 8.2219925, 16.900967, 8.31192, 30.750092, 8.2219925, 44.869003, 11.189667, 49.365475, 11.369522, 57.0994, 11.279594, 65.19304, 6.783127, 68.97008, -0.051509857, 65.3729, -1.4004478, 56.290035, -1.2205887, 48.646038, 1.6571503, 45.138794, 1.5672226, 31.559456, 1.3873596, 16.990894, 1.2075043, 1.5230427, 4.534889, -3.8727202)
+uv = PackedVector2Array(8.31192, 2.332407, 8.2219925, 16.900967, 8.31192, 30.750092, 8.2219925, 44.869003, 11.189667, 49.365475, 11.369522, 57.0994, 11.279594, 65.19304, 6.783127, 68.97008, -0.051509857, 65.3729, -1.4004478, 56.290035, -1.2205887, 48.646038, 1.6571503, 45.138794, 1.5672226, 31.559456, 1.3873596, 16.990894, 1.2075043, 1.5230427, 4.534889, -3.8727202)
+bones = ["Bone2D_0", PackedFloat32Array(1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1), "Bone2D_0/Bone2D_1", PackedFloat32Array(0, 0, 1, 1, 1, 0.089999996, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0), "Bone2D_0/Bone2D_1/Bone2D_2", PackedFloat32Array(0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0)]
