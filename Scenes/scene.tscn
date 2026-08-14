@@ -34,8 +34,8 @@ script = ExtResource("1_lrus4")
 base_speed = 40.0
 speed_amp = 10.0
 speed_freq = 0.5
-distance = 320.57
 wave_amp = 15.0
+end_pos = Vector2(101.035, 0)
 
 [node name="AnimatedSprite2D_bee_view" type="AnimatedSprite2D" parent="Node2D_bee_body" unique_id=1235925021]
 scale = Vector2(0.3, 0.3)
