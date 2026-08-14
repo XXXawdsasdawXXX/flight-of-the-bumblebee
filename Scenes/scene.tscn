@@ -28,14 +28,16 @@ animations = [{
 
 [node name="Main" type="Node2D" unique_id=1512873734]
 
-[node name="Node2D_bee_body" type="Node2D" parent="." unique_id=63562769]
+[node name="Node2D_bee_body" type="Node2D" parent="." unique_id=63562769 node_paths=PackedStringArray("view")]
 position = Vector2(0, 179.53)
 script = ExtResource("1_lrus4")
+view = NodePath("AnimatedSprite2D_bee_view")
 base_speed = 40.0
 speed_amp = 10.0
 speed_freq = 0.5
 wave_amp = 15.0
-end_pos = Vector2(101.035, 0)
+start_pos = Vector2(-50, 300)
+end_pos = Vector2(1300, 500)
 
 [node name="AnimatedSprite2D_bee_view" type="AnimatedSprite2D" parent="Node2D_bee_body" unique_id=1235925021]
 scale = Vector2(0.3, 0.3)
