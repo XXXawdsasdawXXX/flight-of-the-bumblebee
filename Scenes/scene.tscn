@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://sge8va0fob61"]
+
+[ext_resource type="Texture2D" uid="uid://dytwxv7xjow32" path="res://Sprites/bumblebee.png" id="1_p6gg1"]
+[ext_resource type="Script" uid="uid://umu4pwybaq2w" path="res://Scripts/StartAnimation.gd" id="3_lrus4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrus4"]
+atlas = ExtResource("1_p6gg1")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8t5iv"]
+atlas = ExtResource("1_p6gg1")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n35m2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrus4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8t5iv")
+}],
+"loop": 1,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[node name="Scene" type="Node2D" unique_id=1512873734]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1235925021]
+position = Vector2(405, 289)
+sprite_frames = SubResource("SpriteFrames_n35m2")
+animation = &"fly"
+script = ExtResource("3_lrus4")
