@@ -85,10 +85,16 @@ func _move(delta: float) -> void:
 			_is_going_forward = true
 			_flip_body()
 			_update_target_position()
+	
 
 		
 	var point := start_pos.lerp(end_pos, _way_progress)
 	position = point	
+
+func _scare_legs() -> void:
+	for leg in body.get_node("Node2D_legs").get_children():
+		if leg.has_method("scare"):
+			leg.scare()
 
 
 func _update_target_position() -> void:
@@ -116,14 +122,13 @@ func _flee(delta: float) -> void:
 
 	_flee_cd = maxf(_flee_cd - delta, 0.0)
 
-	# новый рывок: вошли в зону ИЛИ уже внутри, но кулдаун кончился
 	if inside and _flee_cd <= 0.0 and (not _was_inside or _flee_target == Vector2.ZERO and _flee_offset.length() < 0.5):
-		# проще и понятнее:
 		pass
 
 	if inside and not _was_inside and _flee_cd <= 0.0:
 		_flee_target = from_mouse.normalized() * flee_impulse
 		_flee_cd = flee_cooldown
+		_scare_legs()
 
 	_was_inside = inside
 
