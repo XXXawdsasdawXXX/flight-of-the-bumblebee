@@ -21,6 +21,8 @@ func _process(delta: float) -> void:
 	_prev_global = global_position
 	
 	var target := clampf(velocity.x * drag, -max_angle, max_angle)
+	if global_scale.x > 0.0:
+		target = -target
 	
 	_angle0 = lerp_angle(_angle0, target * 0.45, 1 - exp(-follow * delta))
 	_angle1 = lerp_angle(_angle1, target * 1.2 , 1 - exp(-follow * delta))

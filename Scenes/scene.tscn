@@ -30,10 +30,10 @@ animations = [{
 
 [node name="Main" type="Node2D" unique_id=1512873734]
 
-[node name="Node2D_bee_body" type="Node2D" parent="." unique_id=63562769 node_paths=PackedStringArray("view")]
+[node name="Node2D_bee" type="Node2D" parent="." unique_id=63562769 node_paths=PackedStringArray("body")]
 position = Vector2(0, 179.53)
 script = ExtResource("1_lrus4")
-view = NodePath("AnimatedSprite2D_bee_view")
+body = NodePath("Node2D_body")
 base_speed = 40.0
 speed_amp = 26.475
 speed_freq = 0.5
@@ -41,16 +41,14 @@ wave_amp = 15.0
 start_pos = Vector2(-50, 300)
 end_pos = Vector2(1300, 500)
 
-[node name="AnimatedSprite2D_bee_view" type="AnimatedSprite2D" parent="Node2D_bee_body" unique_id=1235925021]
+[node name="Node2D_body" type="Node2D" parent="Node2D_bee" unique_id=1619657065]
+
+[node name="Node2D_legs" type="Node2D" parent="Node2D_bee/Node2D_body" unique_id=1338353285]
+position = Vector2(0, 13.470001)
 scale = Vector2(0.3, 0.3)
-sprite_frames = SubResource("SpriteFrames_n35m2")
-animation = &"fly"
-script = ExtResource("3_lrus4")
 
-[node name="Node2D_legs" type="Node2D" parent="Node2D_bee_body/AnimatedSprite2D_bee_view" unique_id=1338353285]
-position = Vector2(0, 44.9)
-
-[node name="Node2D_leg_a" type="Node2D" parent="Node2D_bee_body/AnimatedSprite2D_bee_view/Node2D_legs" unique_id=703871812 node_paths=PackedStringArray("bone0", "bone1", "bone2")]
+[node name="Node2D_leg_0" type="Node2D" parent="Node2D_bee/Node2D_body/Node2D_legs" unique_id=703871812 node_paths=PackedStringArray("bone0", "bone1", "bone2")]
+position = Vector2(-13.333333, -6.6666665)
 script = ExtResource("4_yp48q")
 bone0 = NodePath("Skeleton2D/Bone2D_0")
 bone1 = NodePath("Skeleton2D/Bone2D_0/Bone2D_1")
@@ -58,22 +56,115 @@ bone2 = NodePath("Skeleton2D/Bone2D_0/Bone2D_1/Bone2D_2")
 drag = 0.007
 follow = 20.0
 
-[node name="Skeleton2D" type="Skeleton2D" parent="Node2D_bee_body/AnimatedSprite2D_bee_view/Node2D_legs/Node2D_leg_a" unique_id=1159328662]
+[node name="Skeleton2D" type="Skeleton2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_0" unique_id=1159328662]
 
-[node name="Bone2D_0" type="Bone2D" parent="Node2D_bee_body/AnimatedSprite2D_bee_view/Node2D_legs/Node2D_leg_a/Skeleton2D" unique_id=1451759504]
+[node name="Bone2D_0" type="Bone2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_0/Skeleton2D" unique_id=1451759504]
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
-[node name="Bone2D_1" type="Bone2D" parent="Node2D_bee_body/AnimatedSprite2D_bee_view/Node2D_legs/Node2D_leg_a/Skeleton2D/Bone2D_0" unique_id=1891377396]
+[node name="Bone2D_1" type="Bone2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_0/Skeleton2D/Bone2D_0" unique_id=1891377396]
 position = Vector2(0, 20)
 rest = Transform2D(1, 0, 0, 1, 0, 20)
 
-[node name="Bone2D_2" type="Bone2D" parent="Node2D_bee_body/AnimatedSprite2D_bee_view/Node2D_legs/Node2D_leg_a/Skeleton2D/Bone2D_0/Bone2D_1" unique_id=2013327996]
+[node name="Bone2D_2" type="Bone2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_0/Skeleton2D/Bone2D_0/Bone2D_1" unique_id=2013327996]
 position = Vector2(0, 33.333332)
 rest = Transform2D(1, 0, 0, 1, 0, 33.333332)
 
-[node name="Polygon2D" type="Polygon2D" parent="Node2D_bee_body/AnimatedSprite2D_bee_view/Node2D_legs/Node2D_leg_a" unique_id=147420283]
+[node name="Polygon2D" type="Polygon2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_0" unique_id=147420283]
 texture = ExtResource("4_8t5iv")
 skeleton = NodePath("../Skeleton2D")
 polygon = PackedVector2Array(5.682007, -2.9827232, 2.4376907, -0.59217453, 1.9254303, 7.433235, 2.0961838, 15.458649, 1.9254303, 23.142551, 1.7546768, 30.826458, 1.9254303, 39.87639, 1.7546768, 45.3405, -0.97737885, 49.26783, -1.6603928, 54.390427, -0.6358719, 62.41584, 2.9499512, 67.36769, 6.1942673, 68.562965, 10.292351, 64.29413, 10.121597, 56.268715, 9.950844, 48.072556, 7.7310486, 43.632965, 7.7310486, 39.705635, 7.901802, 30.997211, 7.901802, 24.167072, 7.901802, 15.970909, 8.243309, 7.433235, 8.072556, 0.26159096)
 uv = PackedVector2Array(5.682007, -2.9827232, 2.4376907, -0.59217453, 1.9254303, 7.433235, 2.0961838, 15.458649, 1.9254303, 23.142551, 1.7546768, 30.826458, 1.9254303, 39.87639, 1.7546768, 45.3405, -0.97737885, 49.26783, -1.6603928, 54.390427, -0.6358719, 62.41584, 2.9499512, 67.36769, 6.1942673, 68.562965, 10.292351, 64.29413, 10.121597, 56.268715, 9.950844, 48.072556, 7.7310486, 43.632965, 7.7310486, 39.705635, 7.901802, 30.997211, 7.901802, 24.167072, 7.901802, 15.970909, 8.243309, 7.433235, 8.072556, 0.26159096)
 bones = ["Bone2D_0", PackedFloat32Array(1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1), "Bone2D_0/Bone2D_1", PackedFloat32Array(0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0), "Bone2D_0/Bone2D_1/Bone2D_2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="Node2D_leg_1" type="Node2D" parent="Node2D_bee/Node2D_body/Node2D_legs" unique_id=507863856 node_paths=PackedStringArray("bone0", "bone1", "bone2")]
+position = Vector2(6.6666665, -6.6666665)
+script = ExtResource("4_yp48q")
+bone0 = NodePath("Skeleton2D/Bone2D_0")
+bone1 = NodePath("Skeleton2D/Bone2D_0/Bone2D_1")
+bone2 = NodePath("Skeleton2D/Bone2D_0/Bone2D_1/Bone2D_2")
+drag = 0.007
+follow = 20.0
+
+[node name="Skeleton2D" type="Skeleton2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_1" unique_id=81024391]
+
+[node name="Bone2D_0" type="Bone2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_1/Skeleton2D" unique_id=1611513561]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="Bone2D_1" type="Bone2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_1/Skeleton2D/Bone2D_0" unique_id=1296145642]
+position = Vector2(0, 20)
+rest = Transform2D(1, 0, 0, 1, 0, 20)
+
+[node name="Bone2D_2" type="Bone2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_1/Skeleton2D/Bone2D_0/Bone2D_1" unique_id=2076987231]
+position = Vector2(0, 33.333332)
+rest = Transform2D(1, 0, 0, 1, 0, 33.333332)
+
+[node name="Polygon2D" type="Polygon2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_1" unique_id=418282493]
+texture = ExtResource("4_8t5iv")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(5.682007, -2.9827232, 2.4376907, -0.59217453, 1.9254303, 7.433235, 2.0961838, 15.458649, 1.9254303, 23.142551, 1.7546768, 30.826458, 1.9254303, 39.87639, 1.7546768, 45.3405, -0.97737885, 49.26783, -1.6603928, 54.390427, -0.6358719, 62.41584, 2.9499512, 67.36769, 6.1942673, 68.562965, 10.292351, 64.29413, 10.121597, 56.268715, 9.950844, 48.072556, 7.7310486, 43.632965, 7.7310486, 39.705635, 7.901802, 30.997211, 7.901802, 24.167072, 7.901802, 15.970909, 8.243309, 7.433235, 8.072556, 0.26159096)
+uv = PackedVector2Array(5.682007, -2.9827232, 2.4376907, -0.59217453, 1.9254303, 7.433235, 2.0961838, 15.458649, 1.9254303, 23.142551, 1.7546768, 30.826458, 1.9254303, 39.87639, 1.7546768, 45.3405, -0.97737885, 49.26783, -1.6603928, 54.390427, -0.6358719, 62.41584, 2.9499512, 67.36769, 6.1942673, 68.562965, 10.292351, 64.29413, 10.121597, 56.268715, 9.950844, 48.072556, 7.7310486, 43.632965, 7.7310486, 39.705635, 7.901802, 30.997211, 7.901802, 24.167072, 7.901802, 15.970909, 8.243309, 7.433235, 8.072556, 0.26159096)
+bones = ["Bone2D_0", PackedFloat32Array(1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1), "Bone2D_0/Bone2D_1", PackedFloat32Array(0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0), "Bone2D_0/Bone2D_1/Bone2D_2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="Node2D_leg_2" type="Node2D" parent="Node2D_bee/Node2D_body/Node2D_legs" unique_id=889283397 node_paths=PackedStringArray("bone0", "bone1", "bone2")]
+position = Vector2(23.333332, -6.6666665)
+script = ExtResource("4_yp48q")
+bone0 = NodePath("Skeleton2D/Bone2D_0")
+bone1 = NodePath("Skeleton2D/Bone2D_0/Bone2D_1")
+bone2 = NodePath("Skeleton2D/Bone2D_0/Bone2D_1/Bone2D_2")
+drag = 0.007
+follow = 20.0
+
+[node name="Skeleton2D" type="Skeleton2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_2" unique_id=1173589769]
+
+[node name="Bone2D_0" type="Bone2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_2/Skeleton2D" unique_id=488734602]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="Bone2D_1" type="Bone2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_2/Skeleton2D/Bone2D_0" unique_id=888518160]
+position = Vector2(0, 20)
+rest = Transform2D(1, 0, 0, 1, 0, 20)
+
+[node name="Bone2D_2" type="Bone2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_2/Skeleton2D/Bone2D_0/Bone2D_1" unique_id=1507351084]
+position = Vector2(0, 33.333332)
+rest = Transform2D(1, 0, 0, 1, 0, 33.333332)
+
+[node name="Polygon2D" type="Polygon2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_2" unique_id=1700917535]
+texture = ExtResource("4_8t5iv")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(5.682007, -2.9827232, 2.4376907, -0.59217453, 1.9254303, 7.433235, 2.0961838, 15.458649, 1.9254303, 23.142551, 1.7546768, 30.826458, 1.9254303, 39.87639, 1.7546768, 45.3405, -0.97737885, 49.26783, -1.6603928, 54.390427, -0.6358719, 62.41584, 2.9499512, 67.36769, 6.1942673, 68.562965, 10.292351, 64.29413, 10.121597, 56.268715, 9.950844, 48.072556, 7.7310486, 43.632965, 7.7310486, 39.705635, 7.901802, 30.997211, 7.901802, 24.167072, 7.901802, 15.970909, 8.243309, 7.433235, 8.072556, 0.26159096)
+uv = PackedVector2Array(5.682007, -2.9827232, 2.4376907, -0.59217453, 1.9254303, 7.433235, 2.0961838, 15.458649, 1.9254303, 23.142551, 1.7546768, 30.826458, 1.9254303, 39.87639, 1.7546768, 45.3405, -0.97737885, 49.26783, -1.6603928, 54.390427, -0.6358719, 62.41584, 2.9499512, 67.36769, 6.1942673, 68.562965, 10.292351, 64.29413, 10.121597, 56.268715, 9.950844, 48.072556, 7.7310486, 43.632965, 7.7310486, 39.705635, 7.901802, 30.997211, 7.901802, 24.167072, 7.901802, 15.970909, 8.243309, 7.433235, 8.072556, 0.26159096)
+bones = ["Bone2D_0", PackedFloat32Array(1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1), "Bone2D_0/Bone2D_1", PackedFloat32Array(0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0), "Bone2D_0/Bone2D_1/Bone2D_2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="Node2D_leg_3" type="Node2D" parent="Node2D_bee/Node2D_body/Node2D_legs" unique_id=933318523 node_paths=PackedStringArray("bone0", "bone1", "bone2")]
+position = Vector2(39.999996, -6.6666665)
+script = ExtResource("4_yp48q")
+bone0 = NodePath("Skeleton2D/Bone2D_0")
+bone1 = NodePath("Skeleton2D/Bone2D_0/Bone2D_1")
+bone2 = NodePath("Skeleton2D/Bone2D_0/Bone2D_1/Bone2D_2")
+drag = 0.007
+follow = 20.0
+
+[node name="Skeleton2D" type="Skeleton2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_3" unique_id=830677541]
+
+[node name="Bone2D_0" type="Bone2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_3/Skeleton2D" unique_id=1473637862]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="Bone2D_1" type="Bone2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_3/Skeleton2D/Bone2D_0" unique_id=250569044]
+position = Vector2(0, 20)
+rest = Transform2D(1, 0, 0, 1, 0, 20)
+
+[node name="Bone2D_2" type="Bone2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_3/Skeleton2D/Bone2D_0/Bone2D_1" unique_id=553432842]
+position = Vector2(0, 33.333332)
+rest = Transform2D(1, 0, 0, 1, 0, 33.333332)
+
+[node name="Polygon2D" type="Polygon2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_3" unique_id=2137969921]
+texture = ExtResource("4_8t5iv")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(5.682007, -2.9827232, 2.4376907, -0.59217453, 1.9254303, 7.433235, 2.0961838, 15.458649, 1.9254303, 23.142551, 1.7546768, 30.826458, 1.9254303, 39.87639, 1.7546768, 45.3405, -0.97737885, 49.26783, -1.6603928, 54.390427, -0.6358719, 62.41584, 2.9499512, 67.36769, 6.1942673, 68.562965, 10.292351, 64.29413, 10.121597, 56.268715, 9.950844, 48.072556, 7.7310486, 43.632965, 7.7310486, 39.705635, 7.901802, 30.997211, 7.901802, 24.167072, 7.901802, 15.970909, 8.243309, 7.433235, 8.072556, 0.26159096)
+uv = PackedVector2Array(5.682007, -2.9827232, 2.4376907, -0.59217453, 1.9254303, 7.433235, 2.0961838, 15.458649, 1.9254303, 23.142551, 1.7546768, 30.826458, 1.9254303, 39.87639, 1.7546768, 45.3405, -0.97737885, 49.26783, -1.6603928, 54.390427, -0.6358719, 62.41584, 2.9499512, 67.36769, 6.1942673, 68.562965, 10.292351, 64.29413, 10.121597, 56.268715, 9.950844, 48.072556, 7.7310486, 43.632965, 7.7310486, 39.705635, 7.901802, 30.997211, 7.901802, 24.167072, 7.901802, 15.970909, 8.243309, 7.433235, 8.072556, 0.26159096)
+bones = ["Bone2D_0", PackedFloat32Array(1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1), "Bone2D_0/Bone2D_1", PackedFloat32Array(0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0), "Bone2D_0/Bone2D_1/Bone2D_2", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="AnimatedSprite2D_bee_view" type="AnimatedSprite2D" parent="Node2D_bee/Node2D_body" unique_id=1235925021]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_n35m2")
+animation = &"fly"
+script = ExtResource("3_lrus4")

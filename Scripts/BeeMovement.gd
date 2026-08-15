@@ -1,7 +1,7 @@
 @tool
 extends Node2D
 
-@export var view: AnimatedSprite2D
+@export var body: Node2D
 @export var base_speed: float = 120
 @export var speed_amp: float = 40
 @export var speed_freq: float = 1.5
@@ -30,8 +30,8 @@ func  _ready() -> void:
 	
 	_path_lenght = start_pos.distance_to(end_pos)
 	position = start_pos
-	view.position = Vector2.ZERO
-	view.flip_h = start_pos.x > end_pos.x
+	body.position = Vector2.ZERO
+	_flip_body()
 	
 	_noise.seed = randi()
 	_noise.frequency = 0.4
@@ -60,20 +60,20 @@ func _move(delta: float) -> void:
 		if _way_progress >= 1:
 			_way_progress = 1
 			_is_going_forward = false
-			view.flip_h = _is_going_forward
+			_flip_body()
 			_update_target_position()
 	else:
 		_way_progress -= step
 		if _way_progress <= 0:
 			_way_progress = 0
 			_is_going_forward = true
-			view.flip_h = _is_going_forward
+			_flip_body()
 			_update_target_position()
 
 		
 	var point := start_pos.lerp(end_pos, _way_progress)
 	position = point	
-	view.position = Vector2(0, _noise.get_noise_1d(_time) * wave_amp)
+	body.position = Vector2(0, _noise.get_noise_1d(_time) * wave_amp)
 
 
 func _update_target_position() -> void:
@@ -88,6 +88,8 @@ func _update_target_position() -> void:
 
 	_path_lenght = start_pos.distance_to(end_pos)
 
+func _flip_body() -> void:
+	body.scale.x = 1.0 if not _is_going_forward else -1.0
 
 func _draw() -> void:
 	var from := to_local(start_pos)
