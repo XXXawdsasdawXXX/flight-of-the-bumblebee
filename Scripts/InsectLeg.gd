@@ -17,17 +17,15 @@ func _ready() -> void:
 	_prev_global = global_position
 	
 func _process(delta: float) -> void:
-	var velocity :Vector2 = (global_position - _prev_global) / maxf(delta, 0.0001)
+	var velocity: Vector2 = (global_position - _prev_global) / maxf(delta, 0.0001)
 	_prev_global = global_position
 	
-	var target := clampf(velocity.x * drag, -max_angle, max_angle)
-	if global_scale.x > 0.0:
-		target = -target
-	
-	_angle0 = lerp_angle(_angle0, target * 0.45, 1 - exp(-follow * delta))
-	_angle1 = lerp_angle(_angle1, target * 1.2 , 1 - exp(-follow * delta))
-	_angle2 = lerp_angle(_angle2, target * 1.8 , 1 - exp(-follow * delta))
+	var local_vel: Vector2 = -global_transform.affine_inverse().basis_xform(velocity)
 
+	var target: float = clampf(-local_vel.x * drag, -max_angle, max_angle)
+	_angle0 = lerp_angle(_angle0, target * 0.45, 1.0 - exp(-follow * delta))
+	_angle1 = lerp_angle(_angle1, target * 1.2, 1.0 - exp(-follow * delta))
+	_angle2 = lerp_angle(_angle2, target * 1.8, 1.0 - exp(-follow * delta))
 	bone0.rotation = _angle0
 	bone1.rotation = _angle1
 	bone2.rotation = _angle2
