@@ -40,12 +40,12 @@ speed_freq = 0.5
 wave_amp = 15.0
 start_pos = Vector2(-50, 300)
 end_pos = Vector2(1300, 500)
-flee_radius = 60.0
-flee_impulse = 8.0
-flee_recovery = 2.0
-flee_cooldown = 1.0
+flee_radius = 120.0
+flee_impulse = 24.0
+flee_recovery = 1.0
+flee_cooldown = 0.75
 flee_in = 3.0
-flee_out = 2.0
+flee_out = 0.75
 
 [node name="Node2D_body" type="Node2D" parent="Node2D_bee" unique_id=1619657065]
 
@@ -62,8 +62,8 @@ bone2 = NodePath("Skeleton2D/Bone2D_0/Bone2D_1/Bone2D_2")
 drag = 0.003
 max_angle = 0.4
 follow = 5.0
-scare_angle = 0.3
-scare_decay = 1.0
+scare_angle = 0.4
+scare_decay = 3.0
 
 [node name="Skeleton2D" type="Skeleton2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_0" unique_id=1159328662]
 
@@ -95,7 +95,7 @@ drag = 0.003
 max_angle = 0.4
 follow = 3.0
 scare_angle = 0.3
-scare_decay = 2.0
+scare_decay = 3.0
 
 [node name="Skeleton2D" type="Skeleton2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_1" unique_id=81024391]
 
@@ -126,7 +126,7 @@ bone2 = NodePath("Skeleton2D/Bone2D_0/Bone2D_1/Bone2D_2")
 drag = 0.003
 max_angle = 0.4
 scare_angle = -0.3
-scare_decay = 2.0
+scare_decay = 3.0
 
 [node name="Skeleton2D" type="Skeleton2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_2" unique_id=1173589769]
 
@@ -156,9 +156,9 @@ bone1 = NodePath("Skeleton2D/Bone2D_0/Bone2D_1")
 bone2 = NodePath("Skeleton2D/Bone2D_0/Bone2D_1/Bone2D_2")
 drag = 0.003
 max_angle = 0.4
-follow = 15.0
-scare_angle = -0.3
-scare_decay = 2.0
+follow = 7.0
+scare_angle = -0.4
+scare_decay = 3.0
 
 [node name="Skeleton2D" type="Skeleton2D" parent="Node2D_bee/Node2D_body/Node2D_legs/Node2D_leg_3" unique_id=830677541]
 
