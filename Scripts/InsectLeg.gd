@@ -7,7 +7,9 @@ extends Node2D
 @export var max_angle: float = 0.6 
 @export var follow: float = 10
 
-@export var scare_angle: float = 0.75
+@export var scare_angle_min: float = 0.4
+@export var scare_angle_max: float = 1.0
+
 @export var scare_decay: float = 5.0
 var _scare: float = 0.0
 var _scare_sign: float = 1.0
@@ -40,14 +42,4 @@ func _process(delta: float) -> void:
 	
 	
 func scare() -> void:
-	var mouse := get_global_mouse_position()
-	var away: Vector2 = global_position - mouse
-	if away.length() < 0.001:
-		away = Vector2.RIGHT  
-	var local_away: Vector2 = global_transform.affine_inverse().basis_xform(away.normalized())
-	_scare_sign = signf(local_away.x)
-	if is_zero_approx(_scare_sign):
-		_scare_sign = signf(local_away.y)
-		if is_zero_approx(_scare_sign):
-			_scare_sign = 1.0
-	_scare = scare_angle * randf_range(0.85, 1.15) 
+	_scare = randf_range(scare_angle_min, scare_angle_max)
