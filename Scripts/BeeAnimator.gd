@@ -21,7 +21,7 @@ var _current_loop: bool
 func _ready() -> void:
 	if Engine.is_editor_hint() or spine == null:
 		return
-	spine.preview_animation = "-- Empty --"
+	spine.preview_animation = fly_clip
 	if not spine.animation_ended.is_connected(_on_animation_ended):
 		spine.animation_ended.connect(_on_animation_ended)
 
@@ -65,7 +65,6 @@ func play_turn() -> float:
 	return duration
 
 
-
 func _queue_resume(clip_name: String, loop: bool) -> void:
 	var anim_state: Variant = spine.get_animation_state()
 	if anim_state == null:
@@ -96,6 +95,7 @@ func _set_clip(clip_name: String, loop: bool, reverse: bool = false) -> Variant:
 		push_warning("BeeAnimator: нет клипа " + clip_name)
 		return null
 	entry.set_reverse(reverse)
+	entry.set_mix_duration(0.25)
 	return entry
 
 

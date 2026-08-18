@@ -72,6 +72,9 @@ func tick(delta: float) -> void:
 	_time += delta
 	_phase_time += delta
 
+	if _phase == AngryPhase.DELAY && _time > delay:
+		_phase = AngryPhase.CHASE
+
 	if _phase == AngryPhase.CARRY_BIRD:
 		var mouse_shift := actor.get_global_mouse_position().distance_to(_catch_point)
 		if mouse_shift >= release_distance:
@@ -89,10 +92,6 @@ func tick(delta: float) -> void:
 			_finish()
 		return
 	
-	if _phase == AngryPhase.EXIT_STATIC and _phase_time > _phase_timeout:
-		_finish()
-		return
-
 	if _phase == AngryPhase.CHASE and not _waiting_exit:
 		_dir = (actor.get_global_mouse_position() - actor.global_position).normalized()
 
@@ -101,23 +100,13 @@ func tick(delta: float) -> void:
 		_after_exit_time = 0.0
 
 	if _waiting_exit:
-		_after_exit_time += delta
-		if _after_exit_time >= duration:
-			if _can_be_angry():
-				_waiting_exit = false
-				_after_exit_time = 0
-			else:
-				_start_exit_static()
-			return
-
-	if _time < delay:
+		_start_exit_static()
+		_finish()
 		return
-
-	if _phase == AngryPhase.DELAY:
-		_phase = AngryPhase.CHASE
-
+		
+	var multiplier : float = 0.05 if _phase == AngryPhase.DELAY or _waiting_exit else 1
 	_current_speed = move_toward(_current_speed, max_speed, acceleration * delta)
-	var move_speed := _current_speed + sin(_time * speed_freq) * speed_amp
+	var move_speed := _current_speed + sin(_time * speed_freq) * speed_amp * multiplier
 	var from := actor.global_position
 	actor.position += _dir * move_speed * delta
 	mover.face_direction(_dir, true)

@@ -17,7 +17,7 @@ var going_forward: bool = true
 var progress: float = 0.0
 var _path_length: float = 0.0
 var _path_time: float = 0.0
-var _look_right: bool = true
+var _look_right: bool
 
 
 func setup() -> void:
@@ -25,9 +25,8 @@ func setup() -> void:
 	actor.position = start_pos
 	progress = 0.0
 	going_forward = true
-	_look_right = true
 	_path_time = 0.0
-	face_direction(Vector2.RIGHT if going_forward else Vector2.LEFT, false)
+	apply_turn(going_forward)
 
 
 func tick_path(delta: float) -> void:
@@ -86,13 +85,14 @@ func apply_turn(going_forward_after: bool) -> void:
 func face_direction(dir: Vector2, with_animation: bool = false) -> void:
 	if absf(dir.x) < 0.001:
 		return
+	
 	var look_right := dir.x > 0.0
-	if look_right == _look_right:
-		return
-	_look_right = look_right
-	body.scale.x = abs(body.scale.x) if _look_right else -abs(body.scale.x)
-	if with_animation:
+	body.scale.x = abs(body.scale.x) if look_right else -abs(body.scale.x)
+	
+	if with_animation and look_right != _look_right:
 		animator.play_turn()
+	
+	_look_right = look_right
 	
 
 func _randomize_next_end_y() -> void:
