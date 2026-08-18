@@ -62,7 +62,7 @@ func begin() -> void:
 	if _dir.length_squared() < 0.001:
 		_dir = Vector2.RIGHT
 	states.set_state(BeeStateMachine.State.ANGRY)
-	animator.play_angry()
+	animator.play_angry_enter()
 
 
 func tick(delta: float) -> void:
@@ -102,11 +102,10 @@ func tick(delta: float) -> void:
 	if _waiting_exit:
 		_start_exit_static()
 		_finish()
-		return
 		
-	var multiplier : float = 0.05 if _phase == AngryPhase.DELAY or _waiting_exit else 1
+	var multiplier : float = 0.5 if _phase == AngryPhase.DELAY or _waiting_exit else 1
 	_current_speed = move_toward(_current_speed, max_speed, acceleration * delta)
-	var move_speed := _current_speed + sin(_time * speed_freq) * speed_amp * multiplier
+	var move_speed := (_current_speed + sin(_time * speed_freq) * speed_amp) * multiplier
 	var from := actor.global_position
 	actor.position += _dir * move_speed * delta
 	mover.face_direction(_dir, true)

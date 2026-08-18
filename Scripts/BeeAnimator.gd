@@ -30,6 +30,13 @@ func play_fly() -> void:
 	play(fly_clip, true)
 
 
+func play_angry_enter() -> float:		
+	var entry : Variant = _set_clip(angry_exit_clip, false)
+	var duration := _clip_duration(entry)
+	_queue_resume(angry_clip, true)
+	return duration
+
+
 func play_angry() -> void:
 	play(angry_clip, true)
 

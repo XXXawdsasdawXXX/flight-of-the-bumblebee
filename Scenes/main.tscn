@@ -51,6 +51,8 @@ actor = NodePath("..")
 mover = NodePath("../Mover")
 animator = NodePath("../Animator")
 states = NodePath("../StateMachine")
+radius = 200.0
+exit_radius = 300.0
 max_speed = 150.0
 acceleration = 30.0
 
