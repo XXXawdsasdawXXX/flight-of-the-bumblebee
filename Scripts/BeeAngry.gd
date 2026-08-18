@@ -14,7 +14,6 @@ extends Node
 	set(value):
 		exit_radius = value
 		_queue_actor_redraw()
-@export var delay: float = 1.5
 @export var duration: float = 2.0
 @export var start_speed: float = 60.0
 @export var max_speed: float = 210.0
@@ -28,6 +27,7 @@ extends Node
 
 var tracking_enabled: bool
 
+var _delay: float = 1.5
 var _time: float = 0.0
 var _after_exit_time: float = 0.0
 var _dir: Vector2 = Vector2.ZERO
@@ -62,7 +62,7 @@ func begin() -> void:
 	if _dir.length_squared() < 0.001:
 		_dir = Vector2.RIGHT
 	states.set_state(BeeStateMachine.State.ANGRY)
-	animator.play_angry_enter()
+	_delay = animator.play_angry_enter()
 
 
 func tick(delta: float) -> void:
@@ -72,7 +72,7 @@ func tick(delta: float) -> void:
 	_time += delta
 	_phase_time += delta
 
-	if _phase == AngryPhase.DELAY && _time > delay:
+	if _phase == AngryPhase.DELAY && _time > _delay:
 		_phase = AngryPhase.CHASE
 
 	if _phase == AngryPhase.CARRY_BIRD:

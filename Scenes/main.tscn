@@ -12,7 +12,6 @@
 [sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_hugnl"]
 atlas_res = ExtResource("6_6iyac")
 skeleton_file_res = ExtResource("7_fdnlq")
-default_mix = 0.1
 
 [node name="Main" type="Node2D" unique_id=1153430918]
 
