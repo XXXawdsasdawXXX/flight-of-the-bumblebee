@@ -3,7 +3,7 @@ extends Node
 
 signal state_changed(previous: State, next: State)
 
-enum State { FLY, CHASE, TURN }
+enum State { FLY, ANGRY, TURN }
 
 var current: State = State.FLY
 
@@ -12,8 +12,8 @@ func is_fly() -> bool:
 	return current == State.FLY
 
 
-func is_chase() -> bool:
-	return current == State.CHASE
+func is_angry() -> bool:
+	return current == State.ANGRY
 
 
 func is_turn() -> bool:
