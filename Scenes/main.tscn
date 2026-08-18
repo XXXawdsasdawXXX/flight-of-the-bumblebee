@@ -65,4 +65,4 @@ update_mode = 1
 preview_skin = "Default"
 preview_animation = "Fly_Angry_Reverse"
 preview_frame = true
-preview_time = 0.0
+preview_time = 0.17

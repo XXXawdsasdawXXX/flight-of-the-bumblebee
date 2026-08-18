@@ -18,6 +18,10 @@ var progress: float = 0.0
 var _path_length: float = 0.0
 var _path_time: float = 0.0
 var _look_right: bool
+var _pending_scale_right: bool
+var _flip_after_turn: bool = false
+var _turn_time: float = 0.0
+var _turn_duration: float = 0.0
 
 
 func setup() -> void:
@@ -26,6 +30,8 @@ func setup() -> void:
 	progress = 0.0
 	going_forward = true
 	_path_time = 0.0
+	if animator != null and not animator.clip_ended.is_connected(_on_animator_clip_ended):
+		animator.clip_ended.connect(_on_animator_clip_ended)
 	apply_turn(going_forward)
 
 
@@ -85,15 +91,52 @@ func apply_turn(going_forward_after: bool) -> void:
 func face_direction(dir: Vector2, with_animation: bool = false) -> void:
 	if absf(dir.x) < 0.001:
 		return
-	
+
 	var look_right := dir.x > 0.0
-	body.scale.x = abs(body.scale.x) if look_right else -abs(body.scale.x)
-	
-	if with_animation and look_right != _look_right:
-		animator.play_turn()
-	
+	if look_right == _look_right:
+		return
+
 	_look_right = look_right
-	
+	if with_animation:
+		if _flip_after_turn:
+			_pending_scale_right = look_right
+			return
+		_pending_scale_right = look_right
+		_flip_after_turn = true
+		_turn_time = 0.0
+		_turn_duration = animator.play_turn() * 0.46
+		if _turn_duration <= 0.0:
+			_finish_animated_turn()
+		return
+
+	_apply_body_scale(look_right)
+
+
+func _process(delta: float) -> void:
+	if not _flip_after_turn:
+		return
+	_turn_time += delta
+	if _turn_time >= _turn_duration:
+		_finish_animated_turn()
+
+
+func _on_animator_clip_ended(clip_name: String) -> void:
+	if _flip_after_turn and clip_name == animator.turn_clip:
+		_finish_animated_turn()
+
+
+func _finish_animated_turn() -> void:
+	if not _flip_after_turn:
+		return
+	_flip_after_turn = false
+	_apply_body_scale(_pending_scale_right)
+
+
+func _apply_body_scale(look_right: bool) -> void:
+	var mag := absf(body.scale.x)
+	if mag < 0.001:
+		mag = 1.0
+	body.scale.x = mag if look_right else -mag
 
 func _randomize_next_end_y() -> void:
 	var size := actor.get_viewport().get_visible_rect().size.y
