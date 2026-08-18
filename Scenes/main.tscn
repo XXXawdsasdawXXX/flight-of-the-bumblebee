@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://dv4j4k1fgoyq7"]
+
+[ext_resource type="Script" uid="uid://kmmhgq8qu4ed" path="res://Scripts/Bee.gd" id="1_6bp64"]
+[ext_resource type="Script" uid="uid://b2pmapvkrfv32" path="res://Scripts/BeeStateMachine.gd" id="2_344ge"]
+[ext_resource type="Script" uid="uid://bd8h3o5b7l2qb" path="res://Scripts/BeeMover.gd" id="3_ynf5e"]
+[ext_resource type="Script" uid="uid://veuemif8453t" path="res://Scripts/BeeAnimator.gd" id="4_hptm8"]
+[ext_resource type="Script" uid="uid://clkuwhuep1bsg" path="res://Scripts/BeeWave.gd" id="5_d1ilt"]
+[ext_resource type="SpineAtlasResource" uid="uid://xn5rqm8o5ct3" path="res://Sprites/bumblebee_skel/Dudya.atlas" id="6_6iyac"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cvsirwwa12kio" path="res://Sprites/bumblebee_skel/Dudya.skel" id="7_fdnlq"]
+
+[sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_hugnl"]
+atlas_res = ExtResource("6_6iyac")
+skeleton_file_res = ExtResource("7_fdnlq")
+default_mix = 0.3
+
+[node name="Main" type="Node2D" unique_id=1153430918]
+
+[node name="Node2D_bee" type="Node2D" parent="." unique_id=1526634242 node_paths=PackedStringArray("body", "states", "mover", "animator", "wave")]
+position = Vector2(0, 179.53)
+script = ExtResource("1_6bp64")
+body = NodePath("Node2D_body")
+states = NodePath("StateMachine")
+mover = NodePath("Mover")
+animator = NodePath("Animator")
+wave = NodePath("Wave")
+base_speed = 30.0
+wave_amp = 10.0
+chase_radius = 130.0
+chase_exit_radius = 250.0
+chase_stop_distance = 1.0
+chase_wave_amp = 10.0
+chase_wave_freq = 5.0
+chase_delay = 1.5
+
+[node name="StateMachine" type="Node" parent="Node2D_bee" unique_id=227574617]
+script = ExtResource("2_344ge")
+
+[node name="Mover" type="Node" parent="Node2D_bee" unique_id=1731736195 node_paths=PackedStringArray("actor", "body")]
+script = ExtResource("3_ynf5e")
+actor = NodePath("..")
+body = NodePath("../Node2D_body")
+
+[node name="Animator" type="Node" parent="Node2D_bee" unique_id=682870603 node_paths=PackedStringArray("spine")]
+script = ExtResource("4_hptm8")
+spine = NodePath("../Node2D_body/SpineSprite")
+min_clip_duration = 0.75
+
+[node name="Wave" type="Node" parent="Node2D_bee" unique_id=1039969998 node_paths=PackedStringArray("target")]
+script = ExtResource("5_d1ilt")
+target = NodePath("../Node2D_body")
+
+[node name="Node2D_body" type="Node2D" parent="Node2D_bee" unique_id=111453293]
+position = Vector2(-61, 160.47)
+
+[node name="SpineSprite" type="SpineSprite" parent="Node2D_bee/Node2D_body" unique_id=1560596]
+skeleton_data_res = SubResource("SpineSkeletonDataResource_hugnl")
+preview_skin = "Default"
+preview_animation = "Fly_2"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(0.08, 0.08)
