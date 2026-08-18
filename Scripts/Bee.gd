@@ -37,9 +37,10 @@ func _process(delta: float) -> void:
 		match states.current:
 			BeeStateMachine.State.ANGRY:
 				angry.tick(delta)
+				wave.tick(delta, angry.wave_amp, angry.wave_freq)
 			BeeStateMachine.State.FLY:
 				mover.tick_path(delta)
-				wave.tick_fly(delta)
+				wave.tick(delta, wave.amp, wave.freq)
 			BeeStateMachine.State.TURN:
 				_tick_turn(delta)
 
@@ -60,7 +61,7 @@ func _enter_turn(going_forward_after: bool) -> void:
 	_turn_time = 0.0
 	_did_flip = false
 	_pending_forward = going_forward_after
-	_turn_length = animator.play_turn()
+	_turn_length = 0
 
 
 func _tick_turn(delta: float) -> void:

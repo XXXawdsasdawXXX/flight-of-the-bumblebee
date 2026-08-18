@@ -5,17 +5,20 @@ extends Node
 @export var amp: float = 10.0
 @export var freq: float = 3.0
 
-var _time: float
+var _blend_speed: float = 0.5
+var _amp: float
+var _freq: float
+var _phase: float
 
 
-func tick_fly(delta: float) -> void:
-	_tick(delta, amp, freq)
+func _ready() -> void:
+	_amp = amp
+	_freq = freq
 
 
-func tick_custom(delta: float, custom_amp: float, custom_freq: float) -> void:
-	_tick(delta, custom_amp, custom_freq)
-
-
-func _tick(delta: float, wave_amp: float, wave_freq: float) -> void:
-	_time += delta
-	target.position.y = sin(_time * wave_freq) * wave_amp
+func tick(delta: float, target_amp: float, target_freq: float) -> void:
+	var progress := 1 - exp(-delta * _blend_speed)
+	_amp = lerp(_amp, target_amp, progress) 
+	_freq = lerp(_freq, target_freq, progress)
+	_phase += _freq * delta
+	target.position.y = sin(_phase) * _amp

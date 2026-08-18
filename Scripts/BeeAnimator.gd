@@ -6,13 +6,16 @@ signal clip_ended(clip_name: String)
 @export var spine: SpineSprite
 @export var angry_clip: String = "Fly_Angry"
 @export var angry_exit_clip: String = "Fly_Angry"
-@export var take_bird_clip: String = "take_bird"
+@export var take_bird_clip: String = "Take_Bird"
 @export var bird_idle_clip: String = "Fly_Bird"
-@export var lost_bird_clip: String = "lost_bird"
+@export var lost_bird_clip: String = "Lost_Bird"
 @export var turn_clip: String = "Fly_Angry_Reverse"
 @export var fly_clip: String = "Fly"
 @export var min_clip_duration: float = 0.4
 @export var turn_duration: float = 0.7
+
+var _current_clip: String 
+var _current_loop: bool 
 
 
 func _ready() -> void:
@@ -48,22 +51,39 @@ func play_lost_bird() -> float:
 
 
 func play_turn() -> float:
-	return maxf(play(turn_clip, false), turn_duration)
-
-
-func play(clip_name: String, loop: bool, reverse: bool = false) -> float:
-	var entry : Variant = _set_clip(clip_name, loop)
-	if entry == null:
-		return min_clip_duration
-	entry.set_mix_duration(0.0)
+	var resume_clip := _current_clip
+	var resume_loop := _current_loop
+	
+	if resume_clip.is_empty() or resume_clip == turn_clip:
+		resume_clip = angry_clip
+		resume_loop = true
+	
+	var entry : Variant = _set_clip(turn_clip, false)
 	var duration := _clip_duration(entry)
-	if reverse:
-		entry.set_reverse(true)
-	print("play " + clip_name)
+	
+	_queue_resume(resume_clip, resume_loop)
 	return duration
 
 
-func _set_clip(clip_name: String, loop: bool) -> Variant:
+
+func _queue_resume(clip_name: String, loop: bool) -> void:
+	var anim_state: Variant = spine.get_animation_state()
+	if anim_state == null:
+		return
+	anim_state.add_animation(clip_name, 0.0, loop, 0)
+
+
+func play(clip_name: String, loop: bool, reverse: bool = false) -> float:
+	var entry : Variant = _set_clip(clip_name, loop, reverse)
+	if entry == null:
+		return min_clip_duration
+	var duration := _clip_duration(entry)
+	return duration
+
+
+func _set_clip(clip_name: String, loop: bool, reverse: bool = false) -> Variant:
+	_current_clip = clip_name
+	_current_loop = loop
 	if spine == null:
 		push_warning("BeeAnimator: SpineSprite не назначен")
 		return null
@@ -75,6 +95,7 @@ func _set_clip(clip_name: String, loop: bool) -> Variant:
 	if entry == null:
 		push_warning("BeeAnimator: нет клипа " + clip_name)
 		return null
+	entry.set_reverse(reverse)
 	return entry
 
 

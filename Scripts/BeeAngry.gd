@@ -4,7 +4,6 @@ extends Node
 @export var actor: Node2D
 @export var mover: BeeMover
 @export var animator: BeeAnimator
-@export var wave: BeeWave
 @export var states: BeeStateMachine
 
 @export var radius: float = 130.0:
@@ -72,7 +71,6 @@ func tick(delta: float) -> void:
 
 	_time += delta
 	_phase_time += delta
-	_update_wave(delta)
 
 	if _phase == AngryPhase.CARRY_BIRD:
 		var mouse_shift := actor.get_global_mouse_position().distance_to(_catch_point)
@@ -80,19 +78,23 @@ func tick(delta: float) -> void:
 			_phase = AngryPhase.LOST_BIRD
 			_phase_time = 0.0
 			_phase_timeout = animator.play_lost_bird()
+		
+		elif _phase_timeout > 0 and _phase_time >= _phase_timeout:
+			animator.play_bird_idle()
+			_phase_timeout = 0	
 		return
 
 	if _phase == AngryPhase.LOST_BIRD:
 		if _phase_time >= _phase_timeout:
 			_finish()
 		return
-
-	if _phase == AngryPhase.CHASE and not _waiting_exit:
-		_dir = (actor.get_global_mouse_position() - actor.global_position).normalized()
-
+	
 	if _phase == AngryPhase.EXIT_STATIC and _phase_time > _phase_timeout:
 		_finish()
 		return
+
+	if _phase == AngryPhase.CHASE and not _waiting_exit:
+		_dir = (actor.get_global_mouse_position() - actor.global_position).normalized()
 
 	if not _can_be_angry() and not _waiting_exit:
 		_waiting_exit = true
@@ -118,25 +120,17 @@ func tick(delta: float) -> void:
 	var move_speed := _current_speed + sin(_time * speed_freq) * speed_amp
 	var from := actor.global_position
 	actor.position += _dir * move_speed * delta
-	mover.face_direction(_dir)
+	mover.face_direction(_dir, true)
 
 	if _did_cross_target(from, actor.global_position):
 		_phase = AngryPhase.CARRY_BIRD
 		_phase_time = 0.0
-		_phase_timeout = 0.0
+		_phase_timeout = animator.play_take_bird()
 		_catch_point = actor.get_global_mouse_position()
-		animator.play_take_bird()
 
 
 func _can_be_angry() -> bool:
 	return actor.global_position.distance_to(actor.get_global_mouse_position()) < exit_radius
-
-
-func _update_wave(delta: float) -> void:
-	var freq := wave_freq
-	if _time < delay:
-		freq *= 1.2
-	wave.tick_custom(delta, wave_amp, freq)
 
 
 func _finish() -> void:
@@ -156,8 +150,10 @@ func _start_exit_static() -> void:
 func on_clip_ended(clip_name: String) -> void:
 	if not states.is_angry():
 		return
+	print("animation is ended: " + clip_name)
 	if _phase == AngryPhase.CARRY_BIRD and clip_name == animator.take_bird_clip:
 		animator.play_bird_idle()
+		print("play bird idle")
 		return
 	if _phase == AngryPhase.LOST_BIRD and clip_name == animator.lost_bird_clip:
 		_start_exit_static()

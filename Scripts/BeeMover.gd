@@ -5,6 +5,7 @@ signal reached_path_end(going_forward_after: bool)
 
 @export var actor: Node2D
 @export var body: Node2D
+@export var animator: BeeAnimator
 @export var start_pos: Vector2 = Vector2(-50, 300)
 @export var end_pos: Vector2 = Vector2(1200, 500)
 @export var path_end_margin: float = 0.1
@@ -16,6 +17,7 @@ var going_forward: bool = true
 var progress: float = 0.0
 var _path_length: float = 0.0
 var _path_time: float = 0.0
+var _look_right: bool = true
 
 
 func setup() -> void:
@@ -23,8 +25,9 @@ func setup() -> void:
 	actor.position = start_pos
 	progress = 0.0
 	going_forward = true
+	_look_right = true
 	_path_time = 0.0
-	face_travel_direction()
+	face_direction(Vector2.RIGHT if going_forward else Vector2.LEFT, false)
 
 
 func tick_path(delta: float) -> void:
@@ -71,24 +74,26 @@ func snap_to_path() -> void:
 		return
 	progress = clampf((actor.position - start_pos).dot(offset) / len_sq, 0.0, 1.0)
 	_path_length = start_pos.distance_to(end_pos)
-	going_forward = body.scale.x > 0.0
+	going_forward = _look_right
 
 
 func apply_turn(going_forward_after: bool) -> void:
 	going_forward = going_forward_after
-	face_travel_direction()
+	face_direction(Vector2.RIGHT if going_forward else Vector2.LEFT, false)
 	_randomize_next_end_y()
 
 
-func face_travel_direction() -> void:
-	body.scale.x = 1.0 if going_forward else -1.0
-
-
-func face_direction(dir: Vector2) -> void:
+func face_direction(dir: Vector2, with_animation: bool = false) -> void:
 	if absf(dir.x) < 0.001:
 		return
-	body.scale.x = 1.0 if dir.x > 0.0 else -1.0
-
+	var look_right := dir.x > 0.0
+	if look_right == _look_right:
+		return
+	_look_right = look_right
+	body.scale.x = abs(body.scale.x) if _look_right else -abs(body.scale.x)
+	if with_animation:
+		animator.play_turn()
+	
 
 func _randomize_next_end_y() -> void:
 	var size := actor.get_viewport().get_visible_rect().size.y

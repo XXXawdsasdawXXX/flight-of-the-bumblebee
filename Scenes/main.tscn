@@ -12,7 +12,7 @@
 [sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_hugnl"]
 atlas_res = ExtResource("6_6iyac")
 skeleton_file_res = ExtResource("7_fdnlq")
-default_mix = 0.3
+default_mix = 0.1
 
 [node name="Main" type="Node2D" unique_id=1153430918]
 
@@ -29,40 +29,39 @@ angry = NodePath("Angry")
 [node name="StateMachine" type="Node" parent="Node2D_bee" unique_id=227574617]
 script = ExtResource("2_344ge")
 
-[node name="Mover" type="Node" parent="Node2D_bee" unique_id=1731736195 node_paths=PackedStringArray("actor", "body")]
+[node name="Mover" type="Node" parent="Node2D_bee" unique_id=1731736195 node_paths=PackedStringArray("actor", "body", "animator")]
 script = ExtResource("3_ynf5e")
 actor = NodePath("..")
 body = NodePath("../Node2D_body")
+animator = NodePath("../Animator")
 
 [node name="Animator" type="Node" parent="Node2D_bee" unique_id=682870603 node_paths=PackedStringArray("spine")]
 script = ExtResource("4_hptm8")
 spine = NodePath("../Node2D_body/SpineSprite")
 angry_exit_clip = "Angry"
-take_bird_clip = "Take_Bird"
-lost_bird_clip = "Lost_Bird"
 min_clip_duration = 0.75
 
 [node name="Wave" type="Node" parent="Node2D_bee" unique_id=1039969998 node_paths=PackedStringArray("target")]
 script = ExtResource("5_d1ilt")
 target = NodePath("../Node2D_body")
 
-[node name="Angry" type="Node" parent="Node2D_bee" unique_id=1362031969 node_paths=PackedStringArray("actor", "mover", "animator", "wave", "states")]
+[node name="Angry" type="Node" parent="Node2D_bee" unique_id=1362031969 node_paths=PackedStringArray("actor", "mover", "animator", "states")]
 script = ExtResource("6_angry")
 actor = NodePath("..")
 mover = NodePath("../Mover")
 animator = NodePath("../Animator")
-wave = NodePath("../Wave")
 states = NodePath("../StateMachine")
 max_speed = 150.0
 acceleration = 30.0
 
 [node name="Node2D_body" type="Node2D" parent="Node2D_bee" unique_id=111453293]
 position = Vector2(-61, 160.47)
+scale = Vector2(0.08, 0.08)
 
 [node name="SpineSprite" type="SpineSprite" parent="Node2D_bee/Node2D_body" unique_id=1560596]
 skeleton_data_res = SubResource("SpineSkeletonDataResource_hugnl")
+update_mode = 1
 preview_skin = "Default"
-preview_animation = "Fly_1"
-preview_frame = false
+preview_animation = "Fly_Angry_Reverse"
+preview_frame = true
 preview_time = 0.0
-scale = Vector2(0.08, 0.08)
