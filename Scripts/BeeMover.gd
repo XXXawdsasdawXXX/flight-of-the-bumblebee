@@ -18,6 +18,7 @@ var progress: float = 0.0
 var _path_length: float = 0.0
 var _path_time: float = 0.0
 var _look_right: bool
+var current_speed: float = 0.0
 var _pending_scale_right: bool
 var _flip_after_turn: bool = false
 var _turn_time: float = 0.0
@@ -41,6 +42,7 @@ func tick_path(delta: float) -> void:
 
 	_path_time += delta
 	var speed := base_speed + sin(_path_time * speed_freq) * speed_amp
+	current_speed = speed
 	var step := (speed * delta) / _path_length
 
 	if going_forward:
@@ -80,6 +82,7 @@ func snap_to_path() -> void:
 	progress = clampf((actor.position - start_pos).dot(offset) / len_sq, 0.0, 1.0)
 	_path_length = start_pos.distance_to(end_pos)
 	going_forward = _look_right
+	current_speed = 0.0
 
 
 func apply_turn(going_forward_after: bool) -> void:

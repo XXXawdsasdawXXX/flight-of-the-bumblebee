@@ -8,6 +8,7 @@
 [ext_resource type="SpineAtlasResource" uid="uid://xn5rqm8o5ct3" path="res://Sprites/bumblebee_skel/Dudya.atlas" id="6_6iyac"]
 [ext_resource type="Script" uid="uid://b7angrybee001" path="res://Scripts/BeeAngry.gd" id="6_angry"]
 [ext_resource type="SpineSkeletonFileResource" uid="uid://cvsirwwa12kio" path="res://Sprites/bumblebee_skel/Dudya.skel" id="7_fdnlq"]
+[ext_resource type="Script" uid="uid://dpbydpsmc4x33" path="res://Scripts/InsectLeg.gd" id="8_legs"]
 
 [sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_hugnl"]
 atlas_res = ExtResource("6_6iyac")
@@ -16,7 +17,7 @@ skeleton_file_res = ExtResource("7_fdnlq")
 [node name="Main" type="Node2D" unique_id=1153430918]
 
 [node name="Node2D_bee" type="Node2D" parent="." unique_id=1526634242 node_paths=PackedStringArray("body", "states", "mover", "animator", "wave", "angry")]
-position = Vector2(0, 179.53)
+position = Vector2(0, 183)
 script = ExtResource("1_6bp64")
 body = NodePath("Node2D_body")
 states = NodePath("StateMachine")
@@ -56,13 +57,26 @@ max_speed = 150.0
 acceleration = 30.0
 
 [node name="Node2D_body" type="Node2D" parent="Node2D_bee" unique_id=111453293]
-position = Vector2(-61, 160.47)
-scale = Vector2(0.08, 0.08)
+scale = Vector2(0.15, 0.15)
 
 [node name="SpineSprite" type="SpineSprite" parent="Node2D_bee/Node2D_body" unique_id=1560596]
 skeleton_data_res = SubResource("SpineSkeletonDataResource_hugnl")
-update_mode = 1
+bones = true
 preview_skin = "Default"
-preview_animation = "Fly_Angry_Reverse"
-preview_frame = true
+preview_animation = "-- Empty --"
+preview_frame = false
 preview_time = 0.17
+
+[node name="Legs" type="Node2D" parent="Node2D_bee/Node2D_body/SpineSprite" unique_id=1847392011 node_paths=PackedStringArray("spine", "states", "mover")]
+show_behind_parent = true
+script = ExtResource("8_legs")
+spine = NodePath("..")
+states = NodePath("../../../StateMachine")
+mover = NodePath("../../../Mover")
+bone_names = PackedStringArray("L21", "L22", "L23", "-", "-", "L1", "L10", "L11", "L12", "-")
+drag = 0.01
+follow = 4.0
+root_leg_multiplier = 0.8
+tip_leg_multiplier = 1.0
+chain_smooth = 1.0
+return_seconds = 0.1
