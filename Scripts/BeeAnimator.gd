@@ -76,6 +76,8 @@ func _queue_resume(clip_name: String, loop: bool) -> void:
 	var anim_state: Variant = spine.get_animation_state()
 	if anim_state == null:
 		return
+	_current_clip = clip_name
+	_current_loop = loop
 	anim_state.add_animation(clip_name, 0.0, loop, 0)
 
 
