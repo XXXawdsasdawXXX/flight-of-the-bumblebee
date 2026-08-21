@@ -5,8 +5,8 @@ extends Node
 @export var swim_clip: String = "Swim"
 @export var agr_clip: String = "Agr"
 @export var start_fly_clip: String = "Agr_Start_Fly"
-@export var fly_up_clip: String = "Agr_Fly_up"
-@export var reverse_clip: String = "Agr_Revere"
+@export var fly_up_clip: String = "Agr_Fly_Up"
+@export var reverse_clip: String = "Agr_Reverse"
 @export var fly_down_clip: String = "Agr_Fly_Down"
 @export var eat_clip: String = "Agr_Fly_Down_Eat"
 @export var fly_down_close_clip: String = "Agr_Fly_Down_Close"
@@ -25,7 +25,9 @@ func play_fly_down_close() -> void:
 
 
 func play_land() -> float:
-	return play(land_clip, false)
+	var entry = _set_clip(land_clip, false)
+	entry.set_mix_time(0.2)
+	return _clip_duration(entry)
 
 
 func play_reverse() -> float:

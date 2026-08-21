@@ -58,7 +58,7 @@ view = NodePath("SpineSprite_view")
 max_speed = 400.0
 acceleration = 700.0
 friction = 100.0
-jump_velocity = -300.0
+jump_velocity = -500.0
 
 [node name="SpineSprite_view" type="SpineSprite" parent="Node2D_player" unique_id=127583062]
 skeleton_data_res = SubResource("SpineSkeletonDataResource_n35m2")

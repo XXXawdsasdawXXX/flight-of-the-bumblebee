@@ -54,12 +54,16 @@ func _process(delta: float) -> void:
 	elif state == State.FLY_DOWN:
 		if not _ate and _can_eat_player():
 			_enter_eat()
+			return
 		if mover.tick_to(_fall_target, delta):
-			_enter_swim()
+			if _ate:
+				_enter_land()
+			else:	
+				_enter_swim()
 
 	elif state == State.EAT:
 		_wait -= delta
-		if _wait <= delta:
+		if _wait <= 0:
 			_enter_fly_down()
 			
 	elif state == State.LAND:
@@ -67,8 +71,6 @@ func _process(delta: float) -> void:
 		if _wait <= 0:
 			_enter_swim()
 	
-	print(str(state))
-
 
 func _enter_land() -> void:
 	state = State.LAND
@@ -111,6 +113,7 @@ func _enter_fly_down() -> void:
 func _enter_fly_up() -> void:
 	state = State.FLY_UP
 	_peak = Vector2(player.global_position.x, player.global_position.y - above)
+	mover.face_to(_peak.x)
 	_wait = animator.play_start_fly()	
 
 

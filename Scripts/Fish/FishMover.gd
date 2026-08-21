@@ -30,7 +30,6 @@ func tick(delta: float) -> void:
 
 func tick_to(target: Vector2, delta: float) -> bool:
 	body.global_position = body.global_position.move_toward(target, jump_speed * delta)
-	_face_to(target.x)
 	return body.global_position.distance_to(target) < 8.0
 
 
@@ -43,6 +42,6 @@ func set_target() -> void:
 	body.scale.x = absf(body.scale.x) * -_dir
 
 
-func _face_to(x: float) -> void:
+func face_to(x: float) -> void:
 	_dir = 1.0 if body.global_position.x < x else -1.0
 	body.scale.x = absf(body.scale.x) * -_dir
