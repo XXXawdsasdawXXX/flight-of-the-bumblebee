@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var button_restart: Button
 @export var view: SpineSprite
 @export var max_speed: float = 1 
 @export var acceleration: float = 1 
@@ -8,6 +9,10 @@ extends CharacterBody2D
 
 var alive: bool = true
 
+
+func _ready() -> void:
+	button_restart.visible = false
+	button_restart.pressed.connect(_on_restart)
 
 func _physics_process(delta: float) -> void:
 	_jump(delta)
@@ -19,6 +24,7 @@ func die() -> void:
 	alive = false
 	hide()
 	set_physics_process(false)
+	button_restart.visible = true
 
 
 func _jump(delta: float) -> void:
@@ -37,3 +43,7 @@ func _move(delta: float) -> void:
 		view.scale.x = abs(view.scale.x) * dir
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, friction * delta)
+
+
+func _on_restart() -> void:
+	get_tree().reload_current_scene()

@@ -51,9 +51,10 @@ preview_frame = false
 preview_time = 0.0
 scale = Vector2(0.1, 0.1)
 
-[node name="Node2D_player" type="CharacterBody2D" parent="." unique_id=335834021 node_paths=PackedStringArray("view")]
+[node name="Node2D_player" type="CharacterBody2D" parent="." unique_id=335834021 node_paths=PackedStringArray("button_restart", "view")]
 position = Vector2(473, 341)
 script = ExtResource("3_jdl8t")
+button_restart = NodePath("../CanvasLayer/Button_restrart")
 view = NodePath("SpineSprite_view")
 max_speed = 400.0
 acceleration = 700.0
@@ -82,3 +83,10 @@ default_color = Color(0, 0, 0, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2031435286]
 position = Vector2(647, 2.5)
 shape = SubResource("RectangleShape2D_hugnl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=609188423]
+
+[node name="Button_restrart" type="Button" parent="CanvasLayer" unique_id=2121405853]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "restrart"
