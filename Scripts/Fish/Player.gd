@@ -15,11 +15,9 @@ func _physics_process(delta: float) -> void:
 
 func _jump(delta: float) -> void:
 	if not is_on_floor():
-		print("move down")
 		velocity += get_gravity() * delta
 		
 	if Input.is_action_just_pressed("move_up") and is_on_floor():
-		print("press jump")
 		velocity.y = jump_velocity
 	
 	

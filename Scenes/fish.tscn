@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ouyqx1q8xukm" path="res://Scripts/Fish/FishMover.gd" id="1_21uvr"]
 [ext_resource type="SpineAtlasResource" uid="uid://dnn8e4h0ko4qp" path="res://Sprites/Fish_skel/Kusaka/Kusaka.atlas" id="1_c4ibo"]
+[ext_resource type="Script" uid="uid://ddjlbh437yylc" path="res://Scripts/Fish/Fish.gd" id="1_lkfiq"]
 [ext_resource type="SpineSkeletonFileResource" uid="uid://bq5o1flydvtch" path="res://Sprites/Fish_skel/Kusaka/Kusaka.skel" id="2_4fqy1"]
 [ext_resource type="Script" uid="uid://c1234n6bxmhk3" path="res://Scripts/Fish/FishAnimator.gd" id="2_csmc7"]
 [ext_resource type="Script" uid="uid://dwohyb67ndp78" path="res://Scripts/Fish/Player.gd" id="3_jdl8t"]
@@ -25,8 +26,12 @@ size = Vector2(1314, 15)
 
 [node name="Fish" type="Node2D" unique_id=1511439570]
 
-[node name="Node2D_fish" type="Node2D" parent="." unique_id=112547835]
-position = Vector2(469, 583)
+[node name="Node2D_fish" type="Node2D" parent="." unique_id=112547835 node_paths=PackedStringArray("player", "animator", "mover")]
+position = Vector2(132, 583)
+script = ExtResource("1_lkfiq")
+player = NodePath("../Node2D_player")
+animator = NodePath("Animator")
+mover = NodePath("Mover")
 
 [node name="Mover" type="Node" parent="Node2D_fish" unique_id=1578470830 node_paths=PackedStringArray("animation", "body")]
 script = ExtResource("1_21uvr")
@@ -46,7 +51,7 @@ preview_time = 0.0
 scale = Vector2(0.1, 0.1)
 
 [node name="Node2D_player" type="CharacterBody2D" parent="." unique_id=335834021 node_paths=PackedStringArray("view")]
-position = Vector2(474, 341)
+position = Vector2(473, 341)
 script = ExtResource("3_jdl8t")
 view = NodePath("SpineSprite_view")
 max_speed = 300.0

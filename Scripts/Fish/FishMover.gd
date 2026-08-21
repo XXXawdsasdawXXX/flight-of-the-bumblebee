@@ -13,15 +13,13 @@ var _time: float = 0;
 var _target: Vector2
 var _move_right: bool
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	_base_y = body.position.y
 	_set_target()
-	animation.play_swim()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func tick(delta: float) -> void:
 	_time += delta
 	body.position.x += _dir * speed * delta
 	
@@ -37,3 +35,4 @@ func _set_target() -> void:
 	_target = Vector2(randf_range(margin, size.x - margin), _base_y)
 	_move_right = body.position.x < _target.x 
 	_dir = 1 if _move_right else -1
+	body.scale.x = absf(body.scale.x) * -_dir

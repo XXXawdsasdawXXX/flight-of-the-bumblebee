@@ -3,6 +3,7 @@ extends Node
 
 @export var spine: SpineSprite
 @export var swim_clip: String = "Swim"
+@export var agr_clip: String = "Agr"
 
 var _current_clip: String
 var _current_loop: bool
@@ -10,6 +11,10 @@ var _current_loop: bool
 
 func play_swim() -> void:
 	play(swim_clip, true)
+
+
+func play_agr() -> float:
+	return play(agr_clip, false)
 
 
 func play(clip_name: String, loop: bool, reverse: bool = false) -> float:
