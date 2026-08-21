@@ -17,27 +17,32 @@ var _move_right: bool
 
 func _ready() -> void:
 	_base_y = body.position.y
-	_set_target()
 
 
 func tick(delta: float) -> void:
 	_time += delta
 	body.position.x += _dir * speed * delta
 	if _move_right and body.position.x >= _target.x:
-		_set_target()
+		set_target()
 	elif not _move_right and body.position.x <= _target.x:
-		_set_target()
+		set_target()
 
 
 func tick_to(target: Vector2, delta: float) -> bool:
 	body.global_position = body.global_position.move_toward(target, jump_speed * delta)
+	_face_to(target.x)
 	return body.global_position.distance_to(target) < 8.0
 
 
-func _set_target() -> void:
+func set_target() -> void:
 	var size := get_viewport().get_visible_rect().size
 	var margin := 40.0
 	_target = Vector2(randf_range(margin, size.x - margin), _base_y)
 	_move_right = body.position.x < _target.x 
 	_dir = 1 if _move_right else -1
+	body.scale.x = absf(body.scale.x) * -_dir
+
+
+func _face_to(x: float) -> void:
+	_dir = 1.0 if body.global_position.x < x else -1.0
 	body.scale.x = absf(body.scale.x) * -_dir

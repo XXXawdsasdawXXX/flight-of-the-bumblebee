@@ -32,7 +32,7 @@ script = ExtResource("1_lkfiq")
 player = NodePath("../Node2D_player")
 animator = NodePath("Animator")
 mover = NodePath("Mover")
-above = 200.0
+above = 250.0
 
 [node name="Mover" type="Node" parent="Node2D_fish" unique_id=1578470830 node_paths=PackedStringArray("animation", "body")]
 script = ExtResource("1_21uvr")
@@ -55,8 +55,8 @@ scale = Vector2(0.1, 0.1)
 position = Vector2(473, 341)
 script = ExtResource("3_jdl8t")
 view = NodePath("SpineSprite_view")
-max_speed = 300.0
-acceleration = 300.0
+max_speed = 400.0
+acceleration = 700.0
 friction = 100.0
 jump_velocity = -300.0
 

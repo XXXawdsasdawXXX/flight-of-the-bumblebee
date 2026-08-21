@@ -6,11 +6,19 @@ extends CharacterBody2D
 @export var friction: float = 1 
 @export var jump_velocity: float = -10 
 
+var alive: bool = true
+
+
 func _physics_process(delta: float) -> void:
 	_jump(delta)
 	_move(delta)
-
 	move_and_slide()
+
+
+func die() -> void:
+	alive = false
+	hide()
+	set_physics_process(false)
 
 
 func _jump(delta: float) -> void:

@@ -8,9 +8,24 @@ extends Node
 @export var fly_up_clip: String = "Agr_Fly_up"
 @export var reverse_clip: String = "Agr_Revere"
 @export var fly_down_clip: String = "Agr_Fly_Down"
+@export var eat_clip: String = "Agr_Fly_Down_Eat"
+@export var fly_down_close_clip: String = "Agr_Fly_Down_Close"
+@export var land_clip: String = "Agr_Fly_Down_Close_Landing"
 
 var _current_clip: String
 var _current_loop: bool
+
+
+func play_eat() -> float:
+	return play(eat_clip, false)
+
+
+func play_fly_down_close() -> void:
+	play(fly_down_close_clip, true)
+
+
+func play_land() -> float:
+	return play(land_clip, false)
 
 
 func play_reverse() -> float:
