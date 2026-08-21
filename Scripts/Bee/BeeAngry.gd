@@ -104,7 +104,7 @@ func tick(delta: float) -> void:
 		_start_exit_static()
 		_finish()
 		
-	var multiplier : float = 0.5 if _phase == AngryPhase.DELAY or _waiting_exit else 1
+	var multiplier : float = 0.5 if (_phase == AngryPhase.DELAY or _waiting_exit) else 1.0
 	_current_speed = move_toward(_current_speed, max_speed, acceleration * delta)
 	var move_speed := (_current_speed + sin(_time * speed_freq) * speed_amp) * multiplier
 	var from := actor.global_position

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bq5o1flydvtch"
+path="res://.godot/imported/Kusaka.skel-0130c796c63c177d66a5f72c54a175be.spskel"
+
+[deps]
+
+source_file="res://Sprites/Fish_skel/Kusaka/Kusaka.skel"
+dest_files=["res://.godot/imported/Kusaka.skel-0130c796c63c177d66a5f72c54a175be.spskel"]
+
+[params]
+

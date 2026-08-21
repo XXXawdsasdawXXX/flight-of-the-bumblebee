@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cvsirwwa12kio"
+path="res://.godot/imported/Dudya.skel-4217509f9abce7e9759f57a900b6f77c.spskel"
+
+[deps]
+
+source_file="res://Sprites/Bumblebee_skel/Dudya.skel"
+dest_files=["res://.godot/imported/Dudya.skel-4217509f9abce7e9759f57a900b6f77c.spskel"]
+
+[params]
+

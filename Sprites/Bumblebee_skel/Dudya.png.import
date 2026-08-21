@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c618oxce6lrwf"
-path="res://.godot/imported/Dudya.png-c636c6ce9bdf98f6cc03e405598586ae.ctex"
+path="res://.godot/imported/Dudya.png-86e0158da1e3734f6cbce59cb30dcd7d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/bumblebee_skel/Dudya.png"
-dest_files=["res://.godot/imported/Dudya.png-c636c6ce9bdf98f6cc03e405598586ae.ctex"]
+source_file="res://Sprites/Bumblebee_skel/Dudya.png"
+dest_files=["res://.godot/imported/Dudya.png-86e0158da1e3734f6cbce59cb30dcd7d.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dytwxv7xjow32"
-path="res://.godot/imported/bumblebee.png-6bec0a8726bd99bce72c9983164c52e0.ctex"
+uid="uid://cshvqbpjhcfqf"
+path="res://.godot/imported/Kusaka.png-3a2e12f14f1eb6dbef46ed4535a6144c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/bumblebee.png"
-dest_files=["res://.godot/imported/bumblebee.png-6bec0a8726bd99bce72c9983164c52e0.ctex"]
+source_file="res://Sprites/Fish_skel/Kusaka/Kusaka.png"
+dest_files=["res://.godot/imported/Kusaka.png-3a2e12f14f1eb6dbef46ed4535a6144c.ctex"]
 
 [params]
 

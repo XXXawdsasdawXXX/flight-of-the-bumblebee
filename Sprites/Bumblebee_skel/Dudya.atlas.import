@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://xn5rqm8o5ct3"
+path="res://.godot/imported/Dudya.atlas-0e0eeb2a7b0070461e11157d66a0ea76.spatlas"
+
+[deps]
+
+source_file="res://Sprites/Bumblebee_skel/Dudya.atlas"
+dest_files=["res://.godot/imported/Dudya.atlas-0e0eeb2a7b0070461e11157d66a0ea76.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

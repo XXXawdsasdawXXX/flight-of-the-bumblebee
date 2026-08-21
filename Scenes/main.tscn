@@ -1,14 +1,13 @@
 [gd_scene format=3 uid="uid://dv4j4k1fgoyq7"]
 
-[ext_resource type="Script" uid="uid://kmmhgq8qu4ed" path="res://Scripts/Bee.gd" id="1_6bp64"]
-[ext_resource type="Script" uid="uid://b2pmapvkrfv32" path="res://Scripts/BeeStateMachine.gd" id="2_344ge"]
-[ext_resource type="Script" uid="uid://bd8h3o5b7l2qb" path="res://Scripts/BeeMover.gd" id="3_ynf5e"]
-[ext_resource type="Script" uid="uid://veuemif8453t" path="res://Scripts/BeeAnimator.gd" id="4_hptm8"]
-[ext_resource type="Script" uid="uid://clkuwhuep1bsg" path="res://Scripts/BeeWave.gd" id="5_d1ilt"]
-[ext_resource type="SpineAtlasResource" uid="uid://xn5rqm8o5ct3" path="res://Sprites/bumblebee_skel/Dudya.atlas" id="6_6iyac"]
-[ext_resource type="Script" uid="uid://b7angrybee001" path="res://Scripts/BeeAngry.gd" id="6_angry"]
-[ext_resource type="SpineSkeletonFileResource" uid="uid://cvsirwwa12kio" path="res://Sprites/bumblebee_skel/Dudya.skel" id="7_fdnlq"]
-[ext_resource type="Script" uid="uid://dpbydpsmc4x33" path="res://Scripts/InsectLeg.gd" id="8_legs"]
+[ext_resource type="Script" uid="uid://kmmhgq8qu4ed" path="res://Scripts/Bee/Bee.gd" id="1_6bp64"]
+[ext_resource type="Script" uid="uid://b2pmapvkrfv32" path="res://Scripts/Bee/BeeStateMachine.gd" id="2_344ge"]
+[ext_resource type="Script" uid="uid://bd8h3o5b7l2qb" path="res://Scripts/Bee/BeeMover.gd" id="3_ynf5e"]
+[ext_resource type="Script" uid="uid://veuemif8453t" path="res://Scripts/Bee/BeeAnimator.gd" id="4_hptm8"]
+[ext_resource type="Script" uid="uid://clkuwhuep1bsg" path="res://Scripts/Bee/BeeWave.gd" id="5_d1ilt"]
+[ext_resource type="SpineAtlasResource" uid="uid://xn5rqm8o5ct3" path="res://Sprites/Bumblebee_skel/Dudya.atlas" id="6_6iyac"]
+[ext_resource type="Script" uid="uid://b7angrybee001" path="res://Scripts/Bee/BeeAngry.gd" id="6_angry"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cvsirwwa12kio" path="res://Sprites/Bumblebee_skel/Dudya.skel" id="7_fdnlq"]
 
 [sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_hugnl"]
 atlas_res = ExtResource("6_6iyac")
@@ -57,7 +56,7 @@ max_speed = 150.0
 acceleration = 30.0
 
 [node name="Node2D_body" type="Node2D" parent="Node2D_bee" unique_id=111453293]
-scale = Vector2(0.15, 0.15)
+scale = Vector2(0.1, 0.1)
 
 [node name="SpineSprite" type="SpineSprite" parent="Node2D_bee/Node2D_body" unique_id=1560596]
 skeleton_data_res = SubResource("SpineSkeletonDataResource_hugnl")
@@ -66,17 +65,3 @@ preview_skin = "Default"
 preview_animation = "-- Empty --"
 preview_frame = false
 preview_time = 0.17
-
-[node name="Legs" type="Node2D" parent="Node2D_bee/Node2D_body/SpineSprite" unique_id=1847392011 node_paths=PackedStringArray("spine", "states", "mover")]
-show_behind_parent = true
-script = ExtResource("8_legs")
-spine = NodePath("..")
-states = NodePath("../../../StateMachine")
-mover = NodePath("../../../Mover")
-bone_names = PackedStringArray("L21", "L22", "L23", "-", "L1", "L10", "L11", "-", "L17", "L18", "L19", "-", "L2", "L7", "L8", "-", "L13", "L14", "L15", "-", "L3", "L4", "L5")
-drag = 0.02
-follow = 6.0
-root_leg_multiplier = 1.0
-tip_leg_multiplier = 1.0
-chain_smooth = 1.0
-return_seconds = 0.1

@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bs5fxuhn0suq7"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dnn8e4h0ko4qp" path="res://Sprites/Fish_skel/Kusaka/Kusaka.atlas" id="1_c4ibo"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://bq5o1flydvtch" path="res://Sprites/Fish_skel/Kusaka/Kusaka.skel" id="2_4fqy1"]
+[ext_resource type="SpineAtlasResource" uid="uid://xn5rqm8o5ct3" path="res://Sprites/Bumblebee_skel/Dudya.atlas" id="3_urn1o"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://cvsirwwa12kio" path="res://Sprites/Bumblebee_skel/Dudya.skel" id="4_jdl8t"]
+
+[sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_hugnl"]
+atlas_res = ExtResource("1_c4ibo")
+skeleton_file_res = ExtResource("2_4fqy1")
+
+[sub_resource type="SpineSkeletonDataResource" id="SpineSkeletonDataResource_n35m2"]
+atlas_res = ExtResource("3_urn1o")
+skeleton_file_res = ExtResource("4_jdl8t")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hugnl"]
+radius = 14.0
+height = 28.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hugnl"]
+size = Vector2(1314, 10)
+
+[node name="Fish" type="Node2D" unique_id=1511439570]
+
+[node name="Node2D_fish" type="Node2D" parent="." unique_id=112547835]
+position = Vector2(469, 583)
+
+[node name="SpineSprite_view" type="SpineSprite" parent="Node2D_fish" unique_id=1683370851]
+skeleton_data_res = SubResource("SpineSkeletonDataResource_hugnl")
+preview_skin = "Default"
+preview_animation = "Swim"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(0.1, 0.1)
+
+[node name="Node2D_player" type="CharacterBody2D" parent="." unique_id=335834021]
+position = Vector2(474, 341)
+
+[node name="SpineSprite_view" type="SpineSprite" parent="Node2D_player" unique_id=127583062]
+skeleton_data_res = SubResource("SpineSkeletonDataResource_n35m2")
+preview_skin = "Default"
+preview_animation = "-- Empty --"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(2.9999998, 10.999999)
+scale = Vector2(0.05, 0.05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D_player" unique_id=1785537409]
+shape = SubResource("CapsuleShape2D_hugnl")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1657032737]
+position = Vector2(-40, 365)
+
+[node name="Line2D_platform" type="Line2D" parent="StaticBody2D" unique_id=1451187224]
+points = PackedVector2Array(0, 0, 1300, 0)
+default_color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2031435286]
+position = Vector2(647, 0)
+shape = SubResource("RectangleShape2D_hugnl")

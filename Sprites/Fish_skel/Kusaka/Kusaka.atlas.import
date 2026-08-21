@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://dnn8e4h0ko4qp"
+path="res://.godot/imported/Kusaka.atlas-0560e491561fdfef847f40c22103b9d4.spatlas"
+
+[deps]
+
+source_file="res://Sprites/Fish_skel/Kusaka/Kusaka.atlas"
+dest_files=["res://.godot/imported/Kusaka.atlas-0560e491561fdfef847f40c22103b9d4.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"
