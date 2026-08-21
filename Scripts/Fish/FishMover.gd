@@ -6,6 +6,7 @@ extends Node
 @export var speed: float = 80
 @export var bob_amp: float = 10
 @export var bob_freq: float = 2
+@export var jump_speed: float = 450.0
 
 var _dir: float = 1
 var _base_y: float = 0
@@ -22,11 +23,15 @@ func _ready() -> void:
 func tick(delta: float) -> void:
 	_time += delta
 	body.position.x += _dir * speed * delta
-	
 	if _move_right and body.position.x >= _target.x:
 		_set_target()
 	elif not _move_right and body.position.x <= _target.x:
 		_set_target()
+
+
+func tick_to(target: Vector2, delta: float) -> bool:
+	body.global_position = body.global_position.move_toward(target, jump_speed * delta)
+	return body.global_position.distance_to(target) < 8.0
 
 
 func _set_target() -> void:

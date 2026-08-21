@@ -4,9 +4,19 @@ extends Node
 @export var spine: SpineSprite
 @export var swim_clip: String = "Swim"
 @export var agr_clip: String = "Agr"
+@export var start_fly_clip: String = "Agr_Start_Fly"
+@export var fly_up_clip: String = "Agr_Fly_up"
 
 var _current_clip: String
 var _current_loop: bool
+
+
+func play_fly_up() -> void:
+	play(fly_up_clip, true)
+
+
+func play_start_fly() -> float:
+	return play(start_fly_clip, false)
 
 
 func play_swim() -> void:
