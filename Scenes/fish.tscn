@@ -32,6 +32,7 @@ script = ExtResource("1_lkfiq")
 player = NodePath("../Node2D_player")
 animator = NodePath("Animator")
 mover = NodePath("Mover")
+above = 200.0
 
 [node name="Mover" type="Node" parent="Node2D_fish" unique_id=1578470830 node_paths=PackedStringArray("animation", "body")]
 script = ExtResource("1_21uvr")

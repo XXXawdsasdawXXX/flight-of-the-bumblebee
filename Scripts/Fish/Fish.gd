@@ -30,6 +30,7 @@ func _process(delta: float) -> void:
 				animator.play_start_fly()
 			return
 		_peak.x = player.global_position.x
+		_peak.y = player.global_position.y - above
 		if mover.tick_to(_peak, delta):
 			print("долетела")
 	
@@ -52,6 +53,7 @@ func _enter_fly_up() -> void:
 	state = State.FLY
 	_peak = Vector2(player.global_position.x, player.global_position.y - above)
 	_wait = animator.play_start_fly()	
+
 
 func _draw() -> void:
 	draw_arc(Vector2.ZERO, see_range, 0.0, TAU, 48, Color.YELLOW)
