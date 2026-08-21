@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://bs5fxuhn0suq7"]
 
+[ext_resource type="Script" uid="uid://ouyqx1q8xukm" path="res://Scripts/Fish/FishMover.gd" id="1_21uvr"]
 [ext_resource type="SpineAtlasResource" uid="uid://dnn8e4h0ko4qp" path="res://Sprites/Fish_skel/Kusaka/Kusaka.atlas" id="1_c4ibo"]
 [ext_resource type="SpineSkeletonFileResource" uid="uid://bq5o1flydvtch" path="res://Sprites/Fish_skel/Kusaka/Kusaka.skel" id="2_4fqy1"]
+[ext_resource type="Script" uid="uid://c1234n6bxmhk3" path="res://Scripts/Fish/FishAnimator.gd" id="2_csmc7"]
 [ext_resource type="Script" uid="uid://dwohyb67ndp78" path="res://Scripts/Fish/Player.gd" id="3_jdl8t"]
 [ext_resource type="SpineAtlasResource" uid="uid://xn5rqm8o5ct3" path="res://Sprites/Bumblebee_skel/Dudya.atlas" id="3_urn1o"]
 [ext_resource type="SpineSkeletonFileResource" uid="uid://cvsirwwa12kio" path="res://Sprites/Bumblebee_skel/Dudya.skel" id="4_jdl8t"]
@@ -26,6 +28,15 @@ size = Vector2(1314, 15)
 [node name="Node2D_fish" type="Node2D" parent="." unique_id=112547835]
 position = Vector2(469, 583)
 
+[node name="Mover" type="Node" parent="Node2D_fish" unique_id=1578470830 node_paths=PackedStringArray("animation", "body")]
+script = ExtResource("1_21uvr")
+animation = NodePath("../Animator")
+body = NodePath("..")
+
+[node name="Animator" type="Node" parent="Node2D_fish" unique_id=1693564952 node_paths=PackedStringArray("spine")]
+script = ExtResource("2_csmc7")
+spine = NodePath("../SpineSprite_view")
+
 [node name="SpineSprite_view" type="SpineSprite" parent="Node2D_fish" unique_id=1683370851]
 skeleton_data_res = SubResource("SpineSkeletonDataResource_hugnl")
 preview_skin = "Default"
@@ -40,7 +51,7 @@ script = ExtResource("3_jdl8t")
 view = NodePath("SpineSprite_view")
 max_speed = 300.0
 acceleration = 300.0
-friction = 600.0
+friction = 100.0
 jump_velocity = -300.0
 
 [node name="SpineSprite_view" type="SpineSprite" parent="Node2D_player" unique_id=127583062]
