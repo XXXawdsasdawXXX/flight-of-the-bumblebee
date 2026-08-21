@@ -6,9 +6,19 @@ extends Node
 @export var agr_clip: String = "Agr"
 @export var start_fly_clip: String = "Agr_Start_Fly"
 @export var fly_up_clip: String = "Agr_Fly_up"
+@export var reverse_clip: String = "Agr_Revere"
+@export var fly_down_clip: String = "Agr_Fly_Down"
 
 var _current_clip: String
 var _current_loop: bool
+
+
+func play_reverse() -> float:
+	return play(reverse_clip, false)
+	
+	
+func play_fly_down() -> void:
+	play(fly_down_clip, true)
 
 
 func play_fly_up() -> void:
